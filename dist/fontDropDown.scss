@@ -1,0 +1,100 @@
+@import "compass/css3";
+
+@import "compass/css3/user-interface";
+  
+$fontDropdownWidth: 220px;
+$fontDropdownHeight: 200px;
+$fontDropdownRadius: 5px;
+$fontDropdownColor: #2689d6;
+
+body {
+  background: #eee;
+}
+
+.font-dropdown {
+    width: $fontDropdownWidth;
+    border-radius: $fontDropdownRadius;
+    position: relative;
+    margin: 10px auto 0;
+    background-color: #fff;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    cursor: pointer;
+    outline: none;
+
+    .label {
+        @include user-select(none);
+        font-size: 1.2em;
+        position: relative;
+        display: block;
+        padding: 0 10px;
+        height: 36px;
+        line-height: 36px;
+        z-index: 2;
+        white-space: nowrap;
+        overflow: hidden;
+
+        &:after {
+            @include transition(transform .3s);
+           position: absolute;
+	         width: 0;
+	         height: 0;
+           content: "";
+           border-left: 7px solid transparent;
+           border-right: 7px solid transparent;
+           border-top: 7px solid #ccc;
+            left: auto;
+            right: 11px;
+            bottom: 13px;
+        }
+    }
+
+    .dropdown-list {
+        @include transition(all .2s);
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        width: $fontDropdownWidth;
+        border-radius: $fontDropdownRadius;
+        max-height: $fontDropdownHeight / 3;
+        box-shadow: 0 2px 20px rgba(0,0,0,0.15);
+        position: absolute;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        border: 1px solid #ccc;
+        background-color: #fff;
+        overflow-x: hidden;
+        overflow-y: auto;
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    &.active {
+        .dropdown-list {
+            max-height: $fontDropdownHeight;
+            top: 37px;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .label:after {
+            @include rotate(180deg);
+        }
+    }
+
+    li {
+        padding: 0 10px;
+        font-size: 1.4em;
+        line-height: 1.5em;
+        white-space: nowrap;
+        overflow: hidden;
+        &:hover {
+            color: #fff;
+            background-color: $fontDropdownColor;
+        }
+    }
+    .sel {
+        background-color: rgb(240,240,240);
+        color: $fontDropdownColor;
+    }
+}

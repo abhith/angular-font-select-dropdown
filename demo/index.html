@@ -1,0 +1,25 @@
+<div class="font-dropdown" tabindex="1" fd-font-dropdown on-font-change="vm.onFontSelectionChanged(fontFamily)" selected-font="vm.tenantBoard.style.fontFamily">
+    <span class="label" style="color:#000000" ng-style="{{'fontslist[selectedIdx].style'}}">{{fontslist[selectedIdx].name}}</span>
+    <ul class="dropdown-list">
+        <li ng-repeat="font in fontslist" ng-click="changeFont($index)" ng-class="{'sel': $index == selectedIdx}" ng-style="{{font.style}}">
+            {{font.name}}
+        </li>
+    </ul>
+</div>
+
+<script>
+    // inside controller
+    vm.customStyle = {};
+
+    vm.onFontSelectionChanged = onFontSelectionChanged;
+
+    function onFontSelectionChanged(fontFamily) {
+        vm.selectedFontFamily = fontFamily;
+        if (vm.selectedFontFamily) {
+            vm.customStyle["font-family"] = vm.selectedFontFamily;
+        }
+    }
+</script>
+
+<!--custom area where selected font need to apply-->
+<div ng-style="vm.customStyle"> </div>
